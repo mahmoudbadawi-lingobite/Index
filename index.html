@@ -10,13 +10,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/hero-top.webp">
+<link rel="preload" as="image" href="assets/hero.webp">
 <style>
   :root{
     --indigo:#3019a8; --indigo-deep:#1f0f8c; --ink:#5a5a85;
     --page:#fdf5e8; --gold:#f6c945; --navy-a:#1c2c5c; --navy-b:#132652;
     --font-head:'Baloo 2','Hind',system-ui,sans-serif; --font-body:'Hind',system-ui,-apple-system,sans-serif;
-    --hs:calc(min(100vw,1864px)/1333); /* hero scale: px per design unit */
+    --hs:calc(100vw/1333); /* hero scale: px per design unit */
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -26,23 +26,16 @@
   .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
 
   /* ---------- hero ---------- */
-  .hero{position:relative;}
-  .hero-art{
-    height:calc(368 * var(--hs));
-    background:#cfe3fd url('assets/hero-top.webp') center top / cover no-repeat;
-  }
-  .hero-lower{
-    position:relative;
-    min-height:calc(220 * var(--hs));
-    background:linear-gradient(#fdf8f0,#fcf5ea);
-    padding:calc(4 * var(--hs)) 16px 34px;
+  .hero{
+    position:relative;overflow:hidden;
+    background:#fcf5ea url('assets/hero.webp') center top / 100% auto no-repeat;
+    min-height:calc(590 * var(--hs));
+    padding:calc(376 * var(--hs)) 16px calc(44 * var(--hs));
     display:flex;flex-direction:column;align-items:center;
   }
-  .corner{position:absolute;top:calc(-12 * var(--hs));height:calc(232 * var(--hs));width:auto;max-width:34vw;object-fit:cover;pointer-events:none;}
-  .corner.l{left:0;object-position:left top;-webkit-mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(90deg,#000 93%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(90deg,#000 93%,transparent);mask-composite:intersect;}
-  .corner.r{right:0;object-position:right top;-webkit-mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(270deg,#000 93%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(270deg,#000 93%,transparent);mask-composite:intersect;}
+  .corner{display:none;}
   .tagline{
-    position:relative;z-index:1;margin:6px auto 0;max-width:660px;text-align:center;
+    position:relative;z-index:1;margin:0 auto;max-width:660px;text-align:center;
     font-weight:600;font-size:clamp(15px,1.5vw,20.5px);line-height:1.5;color:var(--indigo);
     text-wrap:balance;
   }
@@ -61,12 +54,13 @@
   .icon-nav small{max-width:92px;font-weight:500;font-size:clamp(10.5px,1.05vw,14.5px);line-height:1.25;margin-top:3px;opacity:.9;}
   @media (max-width:930px){
     :root{--hs:.7065px;}
-    .corner.l{-webkit-mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(90deg,#000 72%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(90deg,#000 72%,transparent);mask-composite:intersect;}
-    .corner.r{-webkit-mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(270deg,#000 72%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(270deg,#000 72%,transparent);mask-composite:intersect;}
-    .hero-art{background-size:auto 100%;}
+    .hero{background-size:auto calc(590 * var(--hs));padding:calc(372 * var(--hs)) 14px 30px;}
+    .corner{display:block;position:absolute;top:calc(344 * var(--hs));height:calc(246 * var(--hs));width:auto;max-width:34vw;object-fit:cover;pointer-events:none;z-index:0;}
+    .corner.l{left:0;object-position:left top;-webkit-mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(90deg,#000 70%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(90deg,#000 70%,transparent);mask-composite:intersect;}
+    .corner.r{right:0;object-position:right top;-webkit-mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(270deg,#000 70%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent,#000 9%),linear-gradient(270deg,#000 70%,transparent);mask-composite:intersect;}
   }
   @media (max-width:520px){
-    .hero-lower{padding-bottom:26px;}
+    
     .icon-row{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;width:100%;max-width:420px;}
     .icon-nav{width:auto;}
     .app-icon{width:min(64px,17vw);}
@@ -114,7 +108,8 @@
   /* ---------- section heading ---------- */
   .section-title{display:flex;align-items:center;justify-content:center;gap:clamp(10px,2vw,22px);margin:clamp(40px,6vw,76px) 0 clamp(22px,3vw,36px);}
   .section-title h2{margin:0;font-family:var(--font-head);font-weight:800;font-size:clamp(24px,3vw,38px);letter-spacing:.06em;text-transform:uppercase;color:var(--indigo);line-height:1;}
-  .section-title img{height:clamp(26px,3.4vw,44px);width:auto;}
+  .orn{width:clamp(70px,9vw,120px);height:auto;flex:none;overflow:visible;}
+  .orn.r{transform:scaleX(-1);}
 
   /* ---------- cards ---------- */
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.8vw,36px);}
@@ -188,17 +183,22 @@
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe45c"/><stop offset="1" stop-color="#ffab00"/></linearGradient>
+  <symbol id="orn" viewBox="0 0 120 44" overflow="visible">
+    <rect x="4" y="22" width="42" height="11" rx="5.5" transform="rotate(-22 25 27)" fill="url(#gold)"/>
+    <path d="M76 4C78 15 82 20 94 22C82 24 78 29 76 40C74 29 70 24 58 22C70 20 74 15 76 4Z" fill="url(#gold)" stroke="#ffb400" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M104 2C105 8 107 10 113 11C107 12 105 14 104 20C103 14 101 12 95 11C101 10 103 8 104 2Z" fill="url(#gold)"/>
+    <circle cx="106" cy="33" r="3.4" fill="#ffc21a"/>
+  </symbol>
   <symbol id="star" viewBox="0 0 24 24"><path d="M12 2.6l2.75 5.9 6.45.8-4.75 4.4 1.25 6.4L12 16.8 6.3 20.1l1.25-6.4L2.8 9.3l6.45-.8z" fill="#ffd23f" stroke="#ffb81c" stroke-width="1.6" stroke-linejoin="round"/></symbol>
 </defs></svg>
 
 <header class="hero">
   <h1 class="sr-only">LingoBite — The LingoBite Ecosystem</h1>
-  <div class="hero-art" role="img" aria-label="The LingoBite ecosystem — the LingoBite cookie mascot surrounded by books, a globe and a game controller"></div>
-  <div class="hero-lower">
-    <img class="corner l" src="assets/swoosh-l.webp" alt="" width="330" height="232">
-    <img class="corner r" src="assets/swoosh-r.webp" alt="" width="336" height="232">
-    <p class="tagline">A small family of tools for teaching and learning English — one bite-sized lesson, game, and classroom at a time.</p>
-    <nav class="icon-row" aria-label="Quick links">
+  <img class="corner l" src="assets/swoosh-l.webp" alt="" width="1188" height="886">
+  <img class="corner r" src="assets/swoosh-r.webp" alt="" width="1209" height="884">
+  <p class="tagline">A small family of tools for teaching and learning English — one bite-sized lesson, game, and classroom at a time.</p>
+  <nav class="icon-row" aria-label="Quick links">
     <a class="icon-nav" href="/app/" target="_blank" rel="noopener">
       <span class="app-icon "><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="3" width="14" height="18" rx="2.6" fill="#fff"/><path d="M8 9h7M8 13h5" stroke="#6a2fe0" stroke-width="1.9" stroke-linecap="round"/><circle cx="19.2" cy="4.8" r="2.1" fill="#fff"/></svg></span><b>LingoBite</b><small>Lessons &amp; Progress</small>
     </a>
@@ -211,8 +211,7 @@
     <a class="icon-nav" href="https://elogoldwinner-sys.github.io/bitecode/" target="_blank" rel="noopener">
       <span class="app-icon g"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.4"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.4"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.4"/></g><g fill="#fff"><rect x="6" y="6" width="2" height="2" rx=".4"/><rect x="16" y="6" width="2" height="2" rx=".4"/><rect x="6" y="16" width="2" height="2" rx=".4"/><rect x="13.5" y="13.5" width="3.2" height="3.2" rx=".6"/><rect x="18" y="13.5" width="2.5" height="2.5" rx=".5"/><rect x="13.5" y="18.2" width="2.5" height="2.5" rx=".5"/><rect x="17.6" y="17.6" width="2.9" height="2.9" rx=".6"/></g></svg></span><b>BiteCode</b><small>QR Code Utility</small>
     </a>
-    </nav>
-  </div>
+  </nav>
 </header>
 
 <main>
@@ -223,18 +222,18 @@
       <h2 id="about-name">Mr. Mahmoud Badawi</h2>
       <p>English language teacher at University Schools in Dhahran, the owner of LingoBite Academy for Teaching Languages and the builder behind the whole LingoBite ecosystem.</p>
     </div>
-    <img class="deco cap" src="assets/cap.webp" alt="" width="284" height="228">
-    <img class="deco books" src="assets/books.webp" alt="" width="420" height="249">
+    <img class="deco cap" src="assets/cap.webp" alt="" width="510" height="427">
+    <img class="deco books" src="assets/books.webp" alt="" width="912" height="562">
     <svg class="star" style="left:2.6%;top:14px;--s:26px" aria-hidden="true"><use href="#star"/></svg><svg class="star" style="left:2.4%;bottom:18px;--s:22px" aria-hidden="true"><use href="#star"/></svg><svg class="star" style="right:1.6%;top:44%;--s:26px" aria-hidden="true"><use href="#star"/></svg><svg class="star" style="right:21%;bottom:12%;--s:20px" aria-hidden="true"><use href="#star"/></svg><svg class="star" style="right:1.2%;top:13px;--s:22px" aria-hidden="true"><use href="#star"/></svg>
   </section>
 
   <div class="section-title">
-    <img src="assets/spark-l.webp" alt="" width="56" height="48"><h2>Open an app</h2><img class="flip" src="assets/spark-l.webp" alt="" width="56" height="48">
+    <svg class="orn l" viewBox="0 0 120 44" aria-hidden="true"><use href="#orn"/></svg><h2>Open an app</h2><svg class="orn r" viewBox="0 0 120 44" aria-hidden="true"><use href="#orn"/></svg>
   </div>
   <div class="grid">
     <a class="card c-bite" href="/app/" target="_blank" rel="noopener">
       <img class="critter" src="assets/sun.webp" alt="" style="left:3%;top:5%;width:9.5%" loading="lazy"><img class="critter" src="assets/butterfly.webp" alt="" style="left:8%;bottom:2.5%;width:10.5%" loading="lazy"><svg class="star" style="left:25%;top:13px;--s:24px" aria-hidden="true"><use href="#star"/></svg>
-      <img class="mascot" src="assets/m-lingobite.webp" alt="" width="477" height="437" loading="lazy">
+      <img class="mascot" src="assets/m-lingobite.webp" alt="" width="954" height="874" loading="lazy">
       <div class="card-body">
         <span class="pill">Lessons &amp; progress</span>
         <h3>LingoBite</h3>
@@ -244,7 +243,7 @@
     </a>
     <a class="card c-play" href="/play/" target="_blank" rel="noopener">
       <img class="critter" src="assets/cloud.webp" alt="" style="left:5%;bottom:2%;width:13.5%" loading="lazy"><svg class="star" style="left:2.5%;top:22%;--s:22px" aria-hidden="true"><use href="#star"/></svg><svg class="star" style="left:27%;top:11px;--s:24px" aria-hidden="true"><use href="#star"/></svg>
-      <img class="mascot" src="assets/m-play.webp" alt="" width="477" height="437" loading="lazy">
+      <img class="mascot" src="assets/m-play.webp" alt="" width="954" height="874" loading="lazy">
       <div class="card-body">
         <span class="pill">Learning games</span>
         <h3>LingoBite Play</h3>
@@ -254,7 +253,7 @@
     </a>
     <a class="card c-trace" href="https://elogoldwinner-sys.github.io/lingotrace/" target="_blank" rel="noopener">
       <img class="critter" src="assets/moon.webp" alt="" style="left:29%;top:6%;width:8.2%" loading="lazy"><img class="critter" src="assets/owl.webp" alt="" style="left:8%;bottom:2.5%;width:8.6%" loading="lazy"><svg class="star" style="left:3.5%;top:7%;--s:22px" aria-hidden="true"><use href="#star"/></svg>
-      <img class="mascot" src="assets/m-trace.webp" alt="" width="477" height="437" loading="lazy">
+      <img class="mascot" src="assets/m-trace.webp" alt="" width="954" height="874" loading="lazy">
       <div class="card-body">
         <span class="pill">Classroom management</span>
         <h3>LingoTrace</h3>
@@ -264,7 +263,7 @@
     </a>
     <a class="card c-code" href="https://elogoldwinner-sys.github.io/bitecode/" target="_blank" rel="noopener">
       <img class="critter" src="assets/bee.webp" alt="" style="left:7.5%;bottom:3%;width:10%" loading="lazy"><svg class="star" style="left:30%;top:10px;--s:24px" aria-hidden="true"><use href="#star"/></svg><svg class="star" style="left:3%;top:9%;--s:20px" aria-hidden="true"><use href="#star"/></svg>
-      <img class="mascot" src="assets/m-bitecode.webp" alt="" width="477" height="437" loading="lazy">
+      <img class="mascot" src="assets/m-bitecode.webp" alt="" width="954" height="874" loading="lazy">
       <div class="card-body">
         <span class="pill">Utility</span>
         <h3>BiteCode</h3>
@@ -276,7 +275,7 @@
 </main>
 
 <footer>
-  <img src="assets/foot-l.webp" alt="" width="1128" height="623"><div class="mid"></div><img src="assets/foot-r.webp" alt="" width="1112" height="623">
+  <img src="assets/foot-l.webp" alt="" width="1692" height="934"><div class="mid"></div><img src="assets/foot-r.webp" alt="" width="1668" height="934">
   <div class="credit"><span>LingoBite</span><span>built for the classroom</span><span>© <span id="year"></span></span></div>
 </footer>
 
