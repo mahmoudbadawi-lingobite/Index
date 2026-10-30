@@ -10,8 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/hero-v2.webp">
+<link rel="preload" as="image" href="assets/hero-v3.webp">
 <link rel="preload" as="image" href="assets/cookie.webp">
+<link rel="preload" as="image" href="assets/wordmark.webp">
 <style>
   :root{
     --indigo:#3019a8; --indigo-deep:#1f0f8c; --ink:#5a5a85;
@@ -29,7 +30,7 @@
   /* ---------- hero ---------- */
   .hero{
     position:relative;overflow:hidden;container-type:inline-size;--u:calc(100vw/4800);
-    background:#fcf5ea url('assets/hero-v2.webp') center top / 100% auto no-repeat;
+    background:#fcf5ea url('assets/hero-v3.webp') center top / 100% auto no-repeat;
     min-height:calc(590 * var(--hs));
     padding:calc(376 * var(--hs)) 16px calc(44 * var(--hs));
     display:flex;flex-direction:column;align-items:center;
@@ -184,6 +185,7 @@
   @supports (width:1cqw){.hero{--u:calc(100cqw/4800);}}
   @media (max-width:930px){.hero{--u:calc(590 * var(--hs) / 2124);}}
   .mascot{position:absolute;z-index:0;left:calc(50% + (2005 - 2400) * var(--u));top:calc(271 * var(--u));width:calc(781 * var(--u));height:calc(756 * var(--u));pointer-events:none;}
+  .wordmark{position:absolute;z-index:0;pointer-events:none;left:calc(50% + (1936 - 2400) * var(--u));top:calc(953 * var(--u));width:calc(963 * var(--u));height:auto;transform:scale(.8);transform-origin:50% 19%;}
   .mascot .glow{position:absolute;inset:-14% -14% -6%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,214,90,.55),rgba(255,214,90,.18) 55%,transparent 75%);animation:glow 4.8s ease-in-out infinite;will-change:transform,opacity;}
   .mascot .cookie{position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 88%;animation:cookie-float 7s ease-in-out infinite;will-change:transform;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;filter:drop-shadow(0 calc(10 * var(--u)) calc(14 * var(--u)) rgba(120,60,0,.18));}
   .mascot .cookie.pop{animation:cookie-pop .85s cubic-bezier(.3,1.4,.5,1) 1;}
@@ -208,6 +210,74 @@
   @keyframes twinkle{0%,100%{opacity:0;transform:scale(0) rotate(0)}45%{opacity:1;transform:scale(1) rotate(45deg)}70%{opacity:.85;transform:scale(.7) rotate(80deg)}}
   @media (prefers-reduced-motion:reduce){.mascot .glow,.mascot .cookie,.mascot .sp{animation:none!important}.mascot .sp{opacity:.9;transform:scale(1)}.mascot .glow{opacity:.7}}
 
+  /* ---------- homepage logo animations: 10 cookie + 7 wordmark effects, random + auto-rotating (see script at the bottom) ---------- */
+  .hero{--q:calc(11 * var(--u));}
+  .hero .mascot{perspective:700px;}
+  .hero .mascot .ex{position:absolute;inset:0;pointer-events:none;}
+  .hero .mascot .x{position:absolute;pointer-events:none;}
+  .hero .mascot .cookie.pop{animation:cookie-pop .85s cubic-bezier(.3,1.4,.5,1) 1;}
+  .hero .mascot[data-c=float] .cookie{animation:k-float 4s ease-in-out infinite}
+  .hero .mascot[data-c=hop] .cookie{animation:k-hop 3s infinite}
+  .hero .mascot[data-c=chomp] .cookie{animation:k-chomp 3s infinite}
+  .hero .mascot[data-c=dizzy] .cookie{animation:k-dizzy 2.4s ease-in-out infinite}
+  .hero .mascot[data-c=hiccup] .cookie{animation:k-hic 2.6s infinite}
+  .hero .mascot[data-c=roll] .cookie{transform-origin:50% 55%;animation:k-roll 5s ease-in-out infinite}
+  .hero .mascot[data-c=jelly] .cookie{animation:k-jelly 3.2s infinite}
+  .hero .mascot[data-c=flip] .cookie{animation:k-flip 4s infinite}
+  .hero .mascot[data-c=love] .cookie{animation:k-beat 1.5s ease-in-out infinite}
+  .hero .mascot[data-c=party] .cookie{animation:k-party 1s ease-in-out infinite}
+  .hero .mascot .cookie.pop{animation:cookie-pop .85s cubic-bezier(.3,1.4,.5,1) 1;}
+  @keyframes k-float{0%,100%{transform:translateY(0) rotate(-2.5deg)}50%{transform:translateY(-4%) rotate(2.5deg)}}
+  @keyframes k-hop{0%,45%,100%{transform:none;animation-timing-function:ease-out}52%{transform:scale(1.1,.88)}64%{transform:translateY(-16%) scale(.94,1.08);animation-timing-function:ease-in}78%{transform:scale(1.1,.88)}86%{transform:translateY(-3%)}92%{transform:scale(1.02,.98)}}
+  @keyframes k-chomp{0%,40%,100%{transform:none}44%{transform:scale(1.07,.92)}48%{transform:scale(.95,1.05)}52%{transform:scale(1.07,.92)}56%{transform:scale(.95,1.05)}60%{transform:scale(1.07,.92)}64%{transform:scale(.95,1.05)}68%{transform:scale(1.04,.96)}74%{transform:none}}
+  @keyframes k-dizzy{0%,100%{transform:rotate(-9deg) translateX(-2%)}50%{transform:rotate(9deg) translateX(2%)}}
+  @keyframes k-hic{0%,60%,100%{transform:none}64%{transform:translateY(-7%) scale(1.04,1.06)}68%{transform:translateY(0) scale(1.05,.94)}72%{transform:none}78%{transform:translateY(-9%) scale(1.05,1.07)}83%{transform:translateY(0) scale(1.06,.93)}90%{transform:scale(.99,1.01)}}
+  @keyframes k-roll{0%,100%{transform:translateX(-9%) rotate(-200deg)}50%{transform:translateX(9%) rotate(160deg)}}
+  @keyframes k-jelly{0%,55%,100%{transform:none}60%{transform:scale(1.16,.84)}66%{transform:scale(.86,1.15)}72%{transform:scale(1.1,.92)}78%{transform:scale(.95,1.05)}84%{transform:scale(1.03,.98)}90%{transform:scale(.99,1.01)}}
+  @keyframes k-flip{0%,50%,100%{transform:rotateY(0)}68%{transform:rotateY(180deg) translateY(-8%) scale(1.04)}86%{transform:rotateY(360deg)}92%{transform:rotateY(360deg) scale(1.05,.95)}}
+  @keyframes k-beat{0%,100%{transform:scale(1)}14%{transform:scale(1.07)}28%{transform:scale(1)}42%{transform:scale(1.05)}56%{transform:scale(1)}}
+  @keyframes k-party{0%,100%{transform:translateY(0) rotate(-5deg) scale(1.02,.98)}25%{transform:translateY(-6%) rotate(0) scale(.98,1.03)}50%{transform:translateY(0) rotate(5deg) scale(1.02,.98)}75%{transform:translateY(-6%) rotate(0) scale(.98,1.03)}}
+  /* extras */
+  .hero .mascot .cr{width:calc(var(--q) * 2.4);height:calc(var(--q) * 2.4);border-radius:50%;background:#6b3a14;top:70%;opacity:0;animation:k-crumb 3s cubic-bezier(.3,.1,.7,.5) infinite}
+  @keyframes k-crumb{0%,44%{opacity:0;transform:translate(0,0)}48%{opacity:1}100%{opacity:0;transform:translate(calc(var(--q) * var(--dx)),calc(var(--q) * 22)) rotate(200deg)}}
+  .hero .mascot .orbit{left:50%;top:-8%;width:78%;height:34%;margin-left:-39%;transform:scaleY(.42)}
+  .hero .mascot .orbit .ring{position:absolute;inset:0;animation:k-spin 1.8s linear infinite}
+  .hero .mascot .orbit .ring span{position:absolute;width:17%;aspect-ratio:1}
+  .hero .mascot .orbit svg{display:block;width:100%;height:100%;filter:drop-shadow(0 0 3px rgba(255,190,30,.9))}
+  @keyframes k-spin{to{transform:rotate(360deg)}}
+  .hero .mascot .hl{width:calc(var(--q) * 5);height:calc(var(--q) * 1.2);border-radius:99px;background:#ffb81c;opacity:0;animation:k-hlines 2.6s infinite}
+  .hero .mascot .hl.a{left:4%;top:12%;transform:rotate(-30deg)}.hero .mascot .hl.b{left:92%;top:12%;transform:rotate(30deg)}.hero .mascot .hl.c{left:-2%;top:26%;transform:rotate(-8deg)}.hero .mascot .hl.d{left:96%;top:26%;transform:rotate(8deg)}
+  @keyframes k-hlines{0%,62%,76%,100%{opacity:0}66%,70%,80%,84%{opacity:1}}
+  .hero .mascot .ht{font-size:calc(var(--q) * 7);line-height:1;color:#ff5c8a;opacity:0;animation:k-heart 3s ease-in infinite;text-shadow:0 1px 0 #fff}
+  @keyframes k-heart{0%{opacity:0;transform:translate(0,0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translate(calc(var(--q) * var(--dx)),calc(var(--q) * -20)) scale(1.1) rotate(var(--r))}}
+  .hero .mascot .cf{top:-6%;width:calc(var(--q) * 2.6);height:calc(var(--q) * 4.2);opacity:0;animation:k-conf 3.2s linear infinite}
+  @keyframes k-conf{0%{opacity:0;transform:translate(0,0) rotate(0)}10%{opacity:1}100%{opacity:1;transform:translate(calc(var(--q) * var(--dx)),calc(var(--q) * 70)) rotate(var(--r))}}
+
+  /* wordmark effects */
+  .wordmark{--wm:url(assets/wordmark.webp);display:block;aspect-ratio:963/357;}
+  .wordmark .wmi{position:absolute;inset:0;width:100%;height:100%;max-width:none;will-change:transform}
+  .wordmark .glint,.wordmark .cur{position:absolute;display:none;pointer-events:none}
+  .wordmark[data-w=shine] .wmi{animation:w-float 4s ease-in-out infinite}
+  .wordmark[data-w=shine] .glint{display:block;inset:0;-webkit-mask:var(--wm) center/contain no-repeat;mask:var(--wm) center/contain no-repeat;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.95) 50%,transparent 62%) -160% 0/260% 100% no-repeat;animation:w-gl 2.8s ease-in-out infinite,w-float 4s ease-in-out infinite}
+  .wordmark[data-w=jelly] .wmi{transform-origin:50% 90%;animation:w-jelly 3s infinite}
+  .wordmark[data-w=swing] .wmi{transform-origin:50% -25%;animation:w-swing 3s ease-in-out infinite}
+  .wordmark[data-w=glitch] .wmi{animation:w-glitch 3s infinite steps(1)}
+  .wordmark[data-w=beat] .wmi{animation:w-beat 1.6s ease-in-out infinite}
+  .wordmark[data-w=type] .wmi{animation:w-type 5s steps(14) infinite}
+  .wordmark[data-w=type] .cur{display:block;top:8%;bottom:6%;width:1.8%;border-radius:2px;background:#5a2d12;left:0;animation:w-cursor 5s steps(14) infinite}
+  .wordmark[data-w=flip]{perspective:600px}
+  .wordmark[data-w=flip] .wmi{animation:w-flip 4s infinite}
+  @keyframes w-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4%)}}
+  @keyframes w-gl{0%,30%{background-position:-160% 0}75%,100%{background-position:160% 0}}
+  @keyframes w-jelly{0%,55%,100%{transform:none}60%{transform:scale(1.14,.82)}66%{transform:scale(.88,1.18)}72%{transform:scale(1.08,.94)}78%{transform:scale(.97,1.04)}84%{transform:scale(1.02,.99)}}
+  @keyframes w-swing{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
+  @keyframes w-glitch{0%,66%,100%{transform:none;filter:none}68%{transform:translate(-3%,0) skewX(10deg);filter:drop-shadow(-4px 0 #00e5ff) drop-shadow(4px 0 #ff2bd6)}71%{transform:translate(4%,-3%) skewX(-12deg);filter:drop-shadow(4px 0 #00e5ff) drop-shadow(-4px 0 #ff2bd6)}74%{transform:translate(-2%,3%);filter:hue-rotate(60deg) drop-shadow(-3px 0 #00e5ff)}77%{transform:translate(3%,0) skewX(6deg);filter:drop-shadow(3px 0 #00e5ff) drop-shadow(-3px 0 #ff2bd6)}80%{transform:none;filter:none}}
+  @keyframes w-beat{0%,100%{transform:scale(1)}14%{transform:scale(1.1)}28%{transform:scale(1)}42%{transform:scale(1.06)}56%{transform:scale(1)}}
+  @keyframes w-type{0%{clip-path:inset(0 100% 0 0)}45%,70%{clip-path:inset(0 0 0 0)}90%,100%{clip-path:inset(0 100% 0 0)}}
+  @keyframes w-cursor{0%{left:0;opacity:1}45%{left:100%;opacity:1}50%,70%{left:100%;opacity:0}90%{left:0;opacity:1}100%{left:0;opacity:1}}
+  @keyframes w-flip{0%,50%,100%{transform:rotateX(0)}70%{transform:rotateX(360deg) scale(1.04)}}
+  @media (prefers-reduced-motion:reduce){.hero .mascot .cookie,.wordmark .wmi,.wordmark .glint,.wordmark .cur,.hero .mascot .ex *{animation:none!important}.hero .mascot .ex,.wordmark .glint,.wordmark .cur{display:none!important}}
+
   .flip{transform:scaleX(-1);}
 </style>
 </head>
@@ -226,7 +296,8 @@
 
 <header class="hero">
   <h1 class="sr-only">LingoBite — The LingoBite Ecosystem</h1>
-  <div class="mascot" aria-hidden="true"><span class="glow"></span><img class="cookie" src="assets/cookie.webp" alt="" width="781" height="756" decoding="async"><span class="sp a"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp b"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp c"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp d"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp e"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp f"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span></div>
+  <div class="mascot" aria-hidden="true"><span class="glow"></span><img class="cookie" src="assets/cookie.webp" alt="" width="781" height="756" decoding="async"><span class="ex"></span><span class="sp a"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp b"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp c"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp d"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp e"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span><span class="sp f"><svg viewBox="0 0 24 24"><use href="#spark4"/></svg></span></div>
+  <span class="wordmark" aria-hidden="true"><img class="wmi" src="assets/wordmark.webp" alt="" width="963" height="357" decoding="async"><i class="glint"></i><i class="cur"></i></span>
   <img class="corner l" src="assets/swoosh-l.webp" alt="" width="1188" height="886">
   <img class="corner r" src="assets/swoosh-r.webp" alt="" width="1209" height="884">
   <p class="tagline">A small family of tools for teaching and learning English — one bite-sized lesson, game, and classroom at a time.</p>
@@ -324,9 +395,45 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 <script>
-(function(){var c=document.querySelector('.mascot .cookie');if(!c)return;
-c.addEventListener('click',function(){c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop');});
-c.addEventListener('animationend',function(e){if(e.animationName==='cookie-pop'){c.classList.remove('pop');}});})();
+(function(){
+  /* How many times an effect loops before the next one takes over. */
+  var LOOPS_BEFORE_SWITCH = 3;
+  var COOKIE = ['float','hop','chomp','dizzy','hiccup','roll','jelly','flip','love','party'];
+  var WORD = ['shine','jelly','swing','glitch','beat','type','flip'];
+  var STAR = '<svg viewBox="0 0 24 24"><path d="M12 0C13 7 17 11 24 12 17 13 13 17 12 24 11 17 7 13 0 12 7 11 11 7 12 0Z" fill="#ffd23f"/></svg>';
+
+  /* random pick that never repeats the one on screen / shown last time */
+  function pick(list,key){
+    var last=null;try{last=localStorage.getItem(key);}catch(e){}
+    var pool=list.filter(function(v){return v!==last;});
+    var v=pool[Math.floor(Math.random()*pool.length)]||list[0];
+    try{localStorage.setItem(key,v);}catch(e){}
+    return v;
+  }
+  function extras(v){
+    var h='',i;
+    if(v==='chomp'){[-6,4,-2,8,0,-9,6].forEach(function(dx,i){h+='<span class="x cr" style="--dx:'+dx+';animation-delay:'+(i*.05)+'s;left:'+(76+i*2)+'%"></span>';});}
+    else if(v==='dizzy'){h='<span class="x orbit"><span class="ring">';[[0,40],[42,0],[84,40],[42,80]].forEach(function(p){h+='<span style="left:'+p[0]+'%;top:'+p[1]+'%">'+STAR+'</span>';});h+='</span></span>';}
+    else if(v==='hiccup'){h='<span class="x hl a"></span><span class="x hl b"></span><span class="x hl c"></span><span class="x hl d"></span>';}
+    else if(v==='love'){[[-8,-14],[6,10],[-2,-6]].forEach(function(d,i){h+='<span class="x ht" style="--dx:'+d[0]+';--r:'+d[1]+'deg;left:'+(34+i*14)+'%;top:6%;animation-delay:'+i+'s">\u2665</span>';});}
+    else if(v==='party'){var cols=['#ff4d6d','#ffd23f','#34d399','#38bdf8','#a78bfa'];for(i=0;i<14;i++){h+='<span class="x cf" style="left:'+(4+i*7)+'%;background:'+cols[i%5]+';--dx:'+((i%3-1)*4)+';--r:'+(240+i*40)+'deg;animation-delay:'+(i*.23)+'s"></span>';}}
+    return h;
+  }
+
+  var m=document.querySelector('.hero .mascot'),c=m&&m.querySelector('.cookie'),ex=m&&m.querySelector('.ex');
+  var w=document.querySelector('.hero .wordmark'),wi=w&&w.querySelector('.wmi');
+  if(!m||!c||!w||!wi)return;
+  var cc=0,wc=0;
+  function setCookie(){var v=pick(COOKIE,'lb-home-cookie');m.setAttribute('data-c',v);ex.innerHTML=extras(v);cc=0;}
+  function setWord(){w.setAttribute('data-w',pick(WORD,'lb-home-word'));wc=0;}
+  setCookie();setWord();
+  c.addEventListener('animationiteration',function(e){if(e.target===c&&++cc>=LOOPS_BEFORE_SWITCH)setCookie();});
+  wi.addEventListener('animationiteration',function(e){if(e.target===wi&&++wc>=LOOPS_BEFORE_SWITCH)setWord();});
+
+  /* tap / click the cookie for a happy wiggle */
+  c.addEventListener('click',function(){c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop');});
+  c.addEventListener('animationend',function(e){if(e.animationName==='cookie-pop'){c.classList.remove('pop');}});
+})();
 </script>
 </body>
 </html>
